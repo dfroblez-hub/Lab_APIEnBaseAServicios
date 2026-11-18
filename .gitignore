@@ -1,0 +1,77 @@
+# ------------------------------------------------------
+# VARIABLES DE ENTORNO Y SECRETOS (CRÍTICO)
+# ------------------------------------------------------
+.env
+.env.*
+*.env
+!.env.example
+!.env.template
+
+# Llaves privadas, certificados y credenciales locales
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.secret
+.secrets
+secrets.json
+credentials.json
+
+# ------------------------------------------------------
+# DEPENDENCIAS Y CACHÉS DE NODE.JS
+# ------------------------------------------------------
+node_modules/
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+
+# ------------------------------------------------------
+# LOGS Y RUNTIME
+# ------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------------------------------------
+# BASES DE DATOS LOCALES Y DUMPS
+# ------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+dump.rdb
+
+# ------------------------------------------------------
+# COMPILACIÓN, TESTING Y TEMPORALES
+# ------------------------------------------------------
+dist/
+build/
+coverage/
+.nyc_output/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# ------------------------------------------------------
+# EDITORS Y SISTEMA OPERATIVO
+# ------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
