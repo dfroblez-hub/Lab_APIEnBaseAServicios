@@ -48,6 +48,7 @@ router.post("/login", async (req, res) => {
       .json({ msg: "Correo y contraseña son obligatorios" });
   }
 
+  // Mensaje si el correo o existe o si la contraseña no coincide
   const usuario = await Usuario.findOne({ correo: normalizar(correo) });
   if (!usuario || !(await bcrypt.compare(contrasenia, usuario.contrasenia))) {
     return res.status(401).json({ msg: "Credenciales inválidas" });
