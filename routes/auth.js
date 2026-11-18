@@ -39,4 +39,26 @@ router.post("/register", async (req, res) => {
   res.status(201).json({ msg: "Usuario registrado", id: usuario._id });
 });
 
+// Controlador para el login
+router.post("/login", async (req, res) => {
+  const { correo, contrasenia } = req.body;
+  if (!esTexto(correo, contrasenia)) {
+    return res
+      .status(400)
+      .json({ msg: "Correo y contraseña son obligatorios" });
+  }
+
+  const usuario = await Usuario.findOne({ correo: normalizar(correo) });
+  if (!usuario || !(await bcrypt.compare(contrasenia, usuario.contrasenia))) {
+    return res.status(401).json({ msg: "Credenciales inválidas" });
+  }
+
+  // Generar el token de sesión con el identificador de usuario; vence en 1 hora
+  const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  res.json({ msg: "Login exitoso", token });
+});
+
 module.exports = router;
