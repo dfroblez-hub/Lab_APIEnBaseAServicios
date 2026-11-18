@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
-//
+const reservaRoutes = require("./routes/reservas.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +15,7 @@ app.use(express.json());
 
 // Enrutamiento
 app.use("/api/auth", authRoutes);
+app.use("/api/reservas", reservaRoutes);
 
 // Cualquier otra ruta responde 404 en formato JSON
 app.use((req, res) => {
