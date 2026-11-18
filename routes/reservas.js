@@ -78,4 +78,33 @@ router.delete("/:id", async (req, res) => {
   res.json({ msg: "Reserva cancelada" });
 });
 
+// Actividad 2: Editar la sala, la fecha o la hora de una reserva propia
+router.put("/:id", async (req, res) => {
+  const reserva = await reservaPropia(req, res);
+  if (!reserva) return;
+
+  const { sala, fecha, hora } = req.body;
+  if (sala === undefined && fecha === undefined && hora === undefined) {
+    return res
+      .status(400)
+      .json({ msg: "Envía al menos uno de estos campos: sala, fecha u hora" });
+  }
+
+  // Solo se cambian los campos que llegan en el cuerpo
+  if (sala !== undefined) reserva.sala = sala;
+  if (fecha !== undefined) reserva.fecha = fecha;
+  if (hora !== undefined) reserva.hora = hora;
+
+  if (
+    await buscarChoque(reserva.sala, reserva.fecha, reserva.hora, reserva._id)
+  ) {
+    return res
+      .status(409)
+      .json({ msg: "La sala ya está reservada en esa fecha y hora" });
+  }
+
+  await reserva.save(); // aplica las validaciones del esquema
+  res.json({ msg: "Reserva actualizada", reserva });
+});
+
 module.exports = router;
