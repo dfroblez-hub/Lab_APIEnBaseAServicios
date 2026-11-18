@@ -3,6 +3,8 @@ require("dotenv").config(); // Cargar las variables de entorno
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+//
+//
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Cualquier otra ruta responde 404 en formato JSON
-app.use((res, req) => {
+app.use((req, res) => {
   res.status(404).json({ msg: "Ruta no encontrada" });
 });
 
