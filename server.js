@@ -3,7 +3,7 @@ require("dotenv").config(); // Cargar las variables de entorno
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-//
+const authRoutes = require("./routes/auth");
 //
 
 const app = express();
@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 // Habilitar CORS y permitir parseo de JSON
 app.use(cors());
 app.use(express.json());
+
+// Enrutamiento
+app.use("/api/auth", authRoutes);
 
 // Cualquier otra ruta responde 404 en formato JSON
 app.use((req, res) => {
